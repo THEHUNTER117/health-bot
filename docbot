@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Chat Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .chat-container {
+            width: 400px;
+            height: 600px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-bottom-left-radius: 8px;
+        }
+        .chat-input button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-bottom-right-radius: 8px;
+        }
+        .chat-message {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+        }
+        .chat-message.user {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+        }
+        .chat-message.bot {
+            background-color: #e9ecef;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value.trim();
+            if (userInput) {
+                appendMessage(userInput, 'user');
+                document.getElementById('userInput').value = '';
+                
+                setTimeout(() => {
+                    respondToMessage(userInput);
+                }, 1000);
+            }
+        }
+
+        function appendMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageElement = document.createElement('div');
+            messageElement.className = 'chat-message ' + sender;
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function respondToMessage(message) {
+            let response = "Please enter a valid key according to your problem.";
+            if (message == "1") {
+                response = "Ensure you get plenty of rest to help your body fight off the infection. Also keep checking your body temperature. I would recommend you to take paracetamol. For further information consult some professional doctors. Some Phone numbers are here: 7838714277.";
+            } else if (message == "2") {
+                response = "Ensure you get plenty of rest to help your body fight off the infection. For dry cough - I would recommend you to do gargles and use syrup Honnitus. For wet cough - I would recommend you to use Azithral, syrup Ascoril LS, Montair LC. For further information consult some professional doctors. Some Phone numbers are here: 7838714277.";
+            } else if (message == "3") {
+                response = "Ensure you get plenty of rest to help your body fight off the infection. I would recommend you to use Levocetirizine. For further information consult some professional doctors. Some Phone numbers are here: 7838714277.";
+            } else if (message == "4") {
+                response = "Ensure you get plenty of rest to help your body fight off the infection. I would recommend you to use Drotin M or Digene. For further information consult some professional doctors. Some Phone numbers are here: 7838714277.";
+            } else if (message == "5") {
+                response = "Ensure you get plenty of rest in a quiet, dark room. Drink plenty of water, as dehydration can cause headaches. Use Naxdom. For further information consult some professional doctors. Some Phone numbers are here: 7838714277.";
+            }
+
+            appendMessage(response, 'bot');
+        }
+    </script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            Health Chat Bot
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot">
+                Introducing HealthBot, a smart chatbot that helps identify illnesses and suggest cures using. By understanding the symptoms and health conditions you share, HealthBot can compare them with its medical database to find possible illnesses and recommend treatments, from simple home remedies to advice on when to see a doctor. This project shows how AI can be used in healthcare to provide quick and easy access to health information. While HealthBot is not a replacement for a doctor's visit, it serves as a useful tool to help you understand potential health issues and make informed decisions about your well-being. How may I help you?
+            </div>
+            <div class="chat-message bot">
+                fever: enter 1<br>
+                cough: enter 2<br>
+                cold: enter 3<br>
+                stomach ache: enter 4<br>
+                headache: enter 5<br>
+                Body pain: enter 6
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</body>
+</html>
